@@ -1168,7 +1168,7 @@ button {
 }
 
 .pricing-features li::before {
-  content: 'âœ“';
+  content: '\2713';
   color: var(--cyan-accent);
   font-weight: 900;
   font-size: var(--font-size-xl);
