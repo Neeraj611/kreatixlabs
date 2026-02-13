@@ -586,7 +586,7 @@ button {
 }
 
 .service-features li::before {
-  content: 'â†’';
+  content: '✓';
   color: var(--blue-primary);
   font-weight: 700;
   font-size: var(--font-size-lg);
