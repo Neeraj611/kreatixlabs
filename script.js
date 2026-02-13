@@ -138,7 +138,7 @@ revealElements.forEach(element => {
 });
 
 // === 3D CARD TILT EFFECT ===
-const cards = document.querySelectorAll('.service-card, .trust-card, .pricing-card, .testimonial-card');
+const cards = document.querySelectorAll('.service-card, .trust-card, .pricing-card, .testimonial-card, .stat-item');
 
 cards.forEach(card => {
     card.addEventListener('mousemove', handleCardTilt);
