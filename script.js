@@ -249,21 +249,28 @@ contactForm.addEventListener('submit', async (e) => {
     submitBtn.style.opacity = '0.7';
     submitBtn.disabled = true;
 
-    // Simulate API call (replace with actual backend)
+    // Send to Backend
     try {
-        // Here you would send to your backend
-        console.log('Form submitted:', data);
+        const response = await fetch('http://localhost:5000/api/contact', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(data)
+        });
 
-        // Simulate delay
-        await new Promise(resolve => setTimeout(resolve, 1500));
+        const result = await response.json();
 
-        // Show success message
-        showNotification('Thank you! We\'ll get back to you within 24 hours.', 'success');
-
-        // Reset form
-        contactForm.reset();
+        if (response.ok) {
+            // Show success message
+            showNotification('Thank you! We\'ll get back to you within 24 hours.', 'success');
+            contactForm.reset();
+        } else {
+            throw new Error(result.error || 'Failed to send message');
+        }
 
     } catch (error) {
+        console.error('Error:', error);
         showNotification('Oops! Something went wrong. Please try again.', 'error');
     } finally {
         // Reset button
@@ -271,13 +278,6 @@ contactForm.addEventListener('submit', async (e) => {
         submitBtn.style.opacity = '1';
         submitBtn.disabled = false;
     }
-
-    // Optional: Send to email service or backend API
-    // fetch('/api/contact', {
-    //     method: 'POST',
-    //     headers: { 'Content-Type': 'application/json' },
-    //     body: JSON.stringify(data)
-    // });
 });
 
 // Custom notification function
