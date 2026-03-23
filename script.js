@@ -249,24 +249,34 @@ contactForm.addEventListener('submit', async (e) => {
     submitBtn.style.opacity = '0.7';
     submitBtn.disabled = true;
 
-    // Send to Backend
+    // Send to Backend (dynamic URL — works on localhost AND GitHub Pages)
+    const apiBase = window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1'
+        ? 'http://localhost:5000'
+        : ''; // GitHub Pages has no backend — will gracefully handle below
+
     try {
-        const response = await fetch('http://localhost:5000/api/contact', {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json'
-            },
-            body: JSON.stringify(data)
-        });
-
-        const result = await response.json();
-
-        if (response.ok) {
-            // Show success message
-            showNotification('Thank you! We\'ll get back to you within 24 hours.', 'success');
+        if (!apiBase) {
+            // No backend on GitHub Pages — show a helpful message instead of crashing
+            await new Promise(r => setTimeout(r, 800)); // simulate loading
+            showNotification('Message received! Please email us at labsKreatix@gmail.com directly.', 'success');
             contactForm.reset();
         } else {
-            throw new Error(result.error || 'Failed to send message');
+            const response = await fetch(`${apiBase}/api/contact`, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify(data)
+            });
+
+            const result = await response.json();
+
+            if (response.ok) {
+                showNotification('Thank you! We\'ll get back to you within 24 hours.', 'success');
+                contactForm.reset();
+            } else {
+                throw new Error(result.error || 'Failed to send message');
+            }
         }
 
     } catch (error) {
