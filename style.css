@@ -92,7 +92,93 @@
   --transition-bounce: 0.6s cubic-bezier(0.68, -0.55, 0.265, 1.55);
 }
 
+/* ========================================
+   PREMIUM EFFECTS: Cursor, Scroll, Typewriter
+   ======================================== */
+
+/* Hide default cursor site-wide */
+*, *::before, *::after { cursor: none !important; }
+
+/* Scroll Progress Bar */
+.scroll-progress {
+  position: fixed;
+  top: 0; left: 0;
+  width: 0%;
+  height: 3px;
+  background: var(--gradient-primary);
+  z-index: 9999;
+  transition: width 0.1s linear;
+  box-shadow: 0 0 10px rgba(14, 165, 233, 0.8);
+}
+
+/* Custom Cursor - Dot */
+.cursor-dot {
+  position: fixed;
+  width: 8px; height: 8px;
+  background: #fff;
+  border-radius: 50%;
+  pointer-events: none;
+  z-index: 9999;
+  transform: translate(-50%, -50%);
+  transition: transform 0.1s ease, width 0.3s ease, height 0.3s ease, background 0.3s ease;
+  mix-blend-mode: difference;
+}
+
+/* Custom Cursor - Trailing Ring */
+.cursor-ring {
+  position: fixed;
+  width: 40px; height: 40px;
+  border: 1.5px solid rgba(14, 165, 233, 0.7);
+  border-radius: 50%;
+  pointer-events: none;
+  z-index: 9998;
+  transform: translate(-50%, -50%);
+  transition: transform 0.12s ease, width 0.3s cubic-bezier(0.34,1.56,0.64,1), height 0.3s cubic-bezier(0.34,1.56,0.64,1), border-color 0.3s ease, opacity 0.3s ease;
+}
+
+/* Cursor states on hover over interactive elements */
+body.cursor-hover .cursor-ring {
+  width: 65px; height: 65px;
+  border-color: rgba(139, 92, 246, 0.8);
+  background: rgba(139, 92, 246, 0.06);
+}
+body.cursor-hover .cursor-dot {
+  width: 4px; height: 4px;
+}
+body.cursor-click .cursor-ring {
+  width: 25px; height: 25px;
+  border-color: #0ea5e9;
+}
+
+/* Typewriter text in hero */
+.typewriter-text {
+  display: inline-block;
+  background: var(--gradient-primary);
+  background-size: 200% auto;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  animation: shine 4s linear infinite;
+  position: relative;
+  white-space: nowrap;
+}
+
+/* Blinking caret */
+.typewriter-text::after {
+  content: '|';
+  -webkit-text-fill-color: #0ea5e9;
+  animation: blink 0.75s step-end infinite;
+  font-weight: 300;
+  margin-left: 4px;
+}
+
+@keyframes blink {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0; }
+}
+
 /* === RESET & BASE STYLES === */
+
 * {
   margin: 0;
   padding: 0;

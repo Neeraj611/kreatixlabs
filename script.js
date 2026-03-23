@@ -528,3 +528,137 @@ testimonialCards.forEach(card => {
 });
 
 console.log('🚀 Kretixlab website loaded successfully!');
+
+// ============================================
+// EFFECT 1 - CUSTOM CURSOR WITH TRAILING RING
+// ============================================
+const cursorDot  = document.getElementById('cursorDot');
+const cursorRing = document.getElementById('cursorRing');
+
+// Use requestAnimationFrame for smooth ring tracking
+let ringX = 0, ringY = 0;
+let dotX  = 0, dotY  = 0;
+let mouseX = 0, mouseY = 0;
+
+document.addEventListener('mousemove', (e) => {
+    mouseX = e.clientX;
+    mouseY = e.clientY;
+    // Dot snaps instantly
+    cursorDot.style.left = `${mouseX}px`;
+    cursorDot.style.top  = `${mouseY}px`;
+});
+
+// Smooth ring follow loop
+(function animateRing() {
+    ringX += (mouseX - ringX) * 0.12;
+    ringY += (mouseY - ringY) * 0.12;
+    cursorRing.style.left = `${ringX}px`;
+    cursorRing.style.top  = `${ringY}px`;
+    requestAnimationFrame(animateRing);
+})();
+
+// Expand ring on hover over interactive elements
+const interactiveEls = document.querySelectorAll('a, button, .service-card, .portfolio-item, .tab-btn, .pricing-card, input, textarea, select');
+interactiveEls.forEach(el => {
+    el.addEventListener('mouseenter', () => document.body.classList.add('cursor-hover'));
+    el.addEventListener('mouseleave', () => document.body.classList.remove('cursor-hover'));
+});
+
+// Shrink ring on click
+document.addEventListener('mousedown', () => document.body.classList.add('cursor-click'));
+document.addEventListener('mouseup',   () => document.body.classList.remove('cursor-click'));
+
+// Hide cursor when leaving the window
+document.addEventListener('mouseleave', () => {
+    cursorDot.style.opacity  = '0';
+    cursorRing.style.opacity = '0';
+});
+document.addEventListener('mouseenter', () => {
+    cursorDot.style.opacity  = '1';
+    cursorRing.style.opacity = '1';
+});
+
+// ============================================
+// EFFECT 2 - TYPEWRITER HERO TEXT
+// ============================================
+const typewriterEl = document.getElementById('typewriterText');
+const phrases = [
+    'Build Websites',
+    'Edit Videos',
+    'Scale Brands',
+    'Design Futures',
+    'Drive Growth',
+];
+let phraseIndex = 0;
+let charIndex   = 0;
+let isDeleting  = false;
+let typeTimeout;
+
+function runTypewriter() {
+    const current = phrases[phraseIndex];
+
+    if (!isDeleting) {
+        // Type characters in
+        typewriterEl.textContent = current.slice(0, charIndex + 1);
+        charIndex++;
+        if (charIndex === current.length) {
+            // Pause at full word then start deleting
+            isDeleting = true;
+            typeTimeout = setTimeout(runTypewriter, 2000);
+            return;
+        }
+    } else {
+        // Delete characters
+        typewriterEl.textContent = current.slice(0, charIndex - 1);
+        charIndex--;
+        if (charIndex === 0) {
+            // Move to next phrase
+            isDeleting = false;
+            phraseIndex = (phraseIndex + 1) % phrases.length;
+        }
+    }
+
+    const speed = isDeleting ? 60 : 100;
+    typeTimeout = setTimeout(runTypewriter, speed);
+}
+
+if (typewriterEl) {
+    setTimeout(runTypewriter, 1200); // small delay before starting
+}
+
+// ============================================
+// EFFECT 3 - MAGNETIC BUTTONS
+// ============================================
+document.querySelectorAll('.magnetic-btn').forEach(btn => {
+    const strength = 0.35; // pull strength (0 = none, 1 = full follow)
+
+    btn.addEventListener('mousemove', (e) => {
+        const rect   = btn.getBoundingClientRect();
+        const btnX   = rect.left + rect.width  / 2;
+        const btnY   = rect.top  + rect.height / 2;
+        const distX  = (e.clientX - btnX) * strength;
+        const distY  = (e.clientY - btnY) * strength;
+
+        btn.style.transform = `translate(${distX}px, ${distY}px) scale(1.05)`;
+    });
+
+    btn.addEventListener('mouseleave', () => {
+        btn.style.transform = '';
+        btn.style.transition = 'transform 0.5s cubic-bezier(0.34, 1.56, 0.64, 1)';
+        setTimeout(() => { btn.style.transition = ''; }, 500);
+    });
+});
+
+// ============================================
+// EFFECT 4 - SCROLL PROGRESS BAR
+// ============================================
+const progressBar = document.getElementById('scrollProgress');
+if (progressBar) {
+    window.addEventListener('scroll', () => {
+        const scrollTop  = document.documentElement.scrollTop;
+        const docHeight  = document.documentElement.scrollHeight - document.documentElement.clientHeight;
+        const pct        = (scrollTop / docHeight) * 100;
+        progressBar.style.width = `${pct}%`;
+    }, { passive: true });
+}
+
