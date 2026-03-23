@@ -188,69 +188,139 @@
             <h2 class="section-title reveal">Our Work</h2>
             <p class="section-subtitle reveal">Proof of Excellence: Projects That Deliver Results</p>
 
-            <div class="portfolio-tabs">
-                <button class="tab-btn active" data-filter="all">All</button>
-                <button class="tab-btn" data-filter="video">Video Production</button>
-                <button class="tab-btn" data-filter="webdev">Web Dev</button>
+            <!-- Filter Tabs -->
+            <div class="portfolio-tabs" id="portfolioTabs">
+                <button class="tab-btn active magnetic-btn" data-filter="all">All Projects</button>
+                <button class="tab-btn magnetic-btn" data-filter="video">Video Production</button>
+                <button class="tab-btn magnetic-btn" data-filter="webdev">Web Dev</button>
             </div>
 
-            <div class="portfolio-grid" id="portfolioGrid">
-                <!-- Video Production Projects -->
-                <!-- Replace with your actual portfolio images: 1920x1200px recommended -->
-                <div class="portfolio-item active" data-category="video">
-                    <img src="https://images.unsplash.com/photo-1492619375914-88005aa9e8fb?w=1920&h=1200&fit=crop"
-                        alt="YouTube Growth Campaign" class="portfolio-image">
-                    <div class="portfolio-overlay">
-                        <h3 class="portfolio-title">YouTube Growth Campaign</h3>
-                        <p class="portfolio-category">Video Production</p>
+            <!-- Bento Masonry Grid -->
+            <div class="portfolio-bento" id="portfolioGrid">
+
+                <!-- FEATURED LARGE CARD -->
+                <div class="portfolio-card featured-card active" data-category="webdev">
+                    <div class="portfolio-card-inner">
+                        <img src="https://images.unsplash.com/photo-1460925895917-afdab827c52f?w=1400&h=900&fit=crop" alt="E-Commerce Platform" class="portfolio-image" loading="lazy">
+                        <div class="portfolio-card-glow"></div>
+                        <div class="portfolio-card-overlay">
+                            <div class="portfolio-card-tags">
+                                <span class="ptag">React</span>
+                                <span class="ptag">Next.js</span>
+                                <span class="ptag">MongoDB</span>
+                            </div>
+                            <h3 class="portfolio-card-title">E-Commerce Platform</h3>
+                            <p class="portfolio-card-desc">A full-stack e-commerce solution with real-time inventory and AI-powered recommendations.</p>
+                            <div class="portfolio-card-meta">
+                                <span class="pmeta-label">Web Development</span>
+                                <a href="#contact" class="pmeta-cta">View Case →</a>
+                            </div>
+                        </div>
                     </div>
                 </div>
 
-                <div class="portfolio-item active" data-category="video">
-                    <img src="https://images.unsplash.com/photo-1574717024653-61fd2cf4d44d?w=1920&h=1200&fit=crop"
-                        alt="High-Retention Editing Series" class="portfolio-image">
-                    <div class="portfolio-overlay">
-                        <h3 class="portfolio-title">High-Retention Editing Series</h3>
-                        <p class="portfolio-category">Video Production</p>
+                <!-- MEDIUM CARD -->
+                <div class="portfolio-card active" data-category="video">
+                    <div class="portfolio-card-inner">
+                        <img src="https://images.unsplash.com/photo-1492619375914-88005aa9e8fb?w=800&h=600&fit=crop" alt="YouTube Growth Campaign" class="portfolio-image" loading="lazy">
+                        <div class="portfolio-card-glow"></div>
+                        <div class="portfolio-card-overlay">
+                            <div class="portfolio-card-tags">
+                                <span class="ptag">YouTube</span>
+                                <span class="ptag">SEO</span>
+                            </div>
+                            <h3 class="portfolio-card-title">YouTube Growth Campaign</h3>
+                            <p class="portfolio-card-desc">10K → 500K subscribers in 4 months.</p>
+                            <div class="portfolio-card-meta">
+                                <span class="pmeta-label">Video Production</span>
+                                <a href="#contact" class="pmeta-cta">View Case →</a>
+                            </div>
+                        </div>
                     </div>
                 </div>
 
-                <div class="portfolio-item active" data-category="video">
-                    <img src="https://images.unsplash.com/photo-1611162616475-46b635cb6868?w=1920&h=1200&fit=crop"
-                        alt="Viral Marketing Video" class="portfolio-image">
-                    <div class="portfolio-overlay">
-                        <h3 class="portfolio-title">Viral Marketing Video</h3>
-                        <p class="portfolio-category">Video Production</p>
+                <!-- TALL CARD -->
+                <div class="portfolio-card tall-card active" data-category="webdev">
+                    <div class="portfolio-card-inner">
+                        <img src="https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=800&h=1100&fit=crop" alt="SaaS Dashboard" class="portfolio-image" loading="lazy">
+                        <div class="portfolio-card-glow"></div>
+                        <div class="portfolio-card-overlay">
+                            <div class="portfolio-card-tags">
+                                <span class="ptag">SaaS</span>
+                                <span class="ptag">Dashboard</span>
+                                <span class="ptag">Analytics</span>
+                            </div>
+                            <h3 class="portfolio-card-title">SaaS Analytics Dashboard</h3>
+                            <p class="portfolio-card-desc">Real-time analytics with 40+ custom data visualization components.</p>
+                            <div class="portfolio-card-meta">
+                                <span class="pmeta-label">Web Development</span>
+                                <a href="#contact" class="pmeta-cta">View Case →</a>
+                            </div>
+                        </div>
                     </div>
                 </div>
 
-                <!-- Web Development Projects -->
-                <div class="portfolio-item active" data-category="webdev">
-                    <img src="https://images.unsplash.com/photo-1460925895917-afdab827c52f?w=1920&h=1200&fit=crop"
-                        alt="E-Commerce Platform" class="portfolio-image">
-                    <div class="portfolio-overlay">
-                        <h3 class="portfolio-title">E-Commerce Platform</h3>
-                        <p class="portfolio-category">Web Development</p>
+                <!-- MEDIUM CARD -->
+                <div class="portfolio-card active" data-category="video">
+                    <div class="portfolio-card-inner">
+                        <img src="https://images.unsplash.com/photo-1574717024653-61fd2cf4d44d?w=800&h=600&fit=crop" alt="High-Retention Editing" class="portfolio-image" loading="lazy">
+                        <div class="portfolio-card-glow"></div>
+                        <div class="portfolio-card-overlay">
+                            <div class="portfolio-card-tags">
+                                <span class="ptag">Editing</span>
+                                <span class="ptag">Motion</span>
+                            </div>
+                            <h3 class="portfolio-card-title">High-Retention Editing Series</h3>
+                            <p class="portfolio-card-desc">92% average view duration across 50+ viral videos.</p>
+                            <div class="portfolio-card-meta">
+                                <span class="pmeta-label">Video Production</span>
+                                <a href="#contact" class="pmeta-cta">View Case →</a>
+                            </div>
+                        </div>
                     </div>
                 </div>
 
-                <div class="portfolio-item active" data-category="webdev">
-                    <img src="https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=1920&h=1200&fit=crop"
-                        alt="SaaS Dashboard" class="portfolio-image">
-                    <div class="portfolio-overlay">
-                        <h3 class="portfolio-title">SaaS Dashboard</h3>
-                        <p class="portfolio-category">Web Development</p>
+                <!-- WIDE CARD -->
+                <div class="portfolio-card wide-card active" data-category="video">
+                    <div class="portfolio-card-inner">
+                        <img src="https://images.unsplash.com/photo-1611162616475-46b635cb6868?w=1200&h=600&fit=crop" alt="Viral Marketing Video" class="portfolio-image" loading="lazy">
+                        <div class="portfolio-card-glow"></div>
+                        <div class="portfolio-card-overlay">
+                            <div class="portfolio-card-tags">
+                                <span class="ptag">Viral</span>
+                                <span class="ptag">Ads</span>
+                                <span class="ptag">Branding</span>
+                            </div>
+                            <h3 class="portfolio-card-title">Viral Marketing Campaign</h3>
+                            <p class="portfolio-card-desc">20M+ views across platforms. Zero paid promotion.</p>
+                            <div class="portfolio-card-meta">
+                                <span class="pmeta-label">Video Production</span>
+                                <a href="#contact" class="pmeta-cta">View Case →</a>
+                            </div>
+                        </div>
                     </div>
                 </div>
 
-                <div class="portfolio-item active" data-category="webdev">
-                    <img src="https://images.unsplash.com/photo-1467232004584-a241de8bcf5d?w=1920&h=1200&fit=crop"
-                        alt="Brand Identity Website" class="portfolio-image">
-                    <div class="portfolio-overlay">
-                        <h3 class="portfolio-title">Brand Identity Website</h3>
-                        <p class="portfolio-category">Web Development</p>
+                <!-- MEDIUM CARD -->
+                <div class="portfolio-card active" data-category="webdev">
+                    <div class="portfolio-card-inner">
+                        <img src="https://images.unsplash.com/photo-1467232004584-a241de8bcf5d?w=800&h=600&fit=crop" alt="Brand Identity Website" class="portfolio-image" loading="lazy">
+                        <div class="portfolio-card-glow"></div>
+                        <div class="portfolio-card-overlay">
+                            <div class="portfolio-card-tags">
+                                <span class="ptag">Branding</span>
+                                <span class="ptag">UI/UX</span>
+                            </div>
+                            <h3 class="portfolio-card-title">Brand Identity Website</h3>
+                            <p class="portfolio-card-desc">Award-winning brand identity from 0 to launch in 3 weeks.</p>
+                            <div class="portfolio-card-meta">
+                                <span class="pmeta-label">Web Development</span>
+                                <a href="#contact" class="pmeta-cta">View Case →</a>
+                            </div>
+                        </div>
                     </div>
                 </div>
+
             </div>
         </div>
     </section>

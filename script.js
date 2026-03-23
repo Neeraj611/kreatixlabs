@@ -85,39 +85,59 @@ window.addEventListener('scroll', () => {
     });
 });
 
-// === PORTFOLIO FILTERING WITH ENHANCED ANIMATIONS ===
+// === PORTFOLIO FILTERING (BENTO GRID) ===
 const tabButtons = document.querySelectorAll('.tab-btn');
-const portfolioItems = document.querySelectorAll('.portfolio-item');
+const portfolioCards = document.querySelectorAll('.portfolio-card');
 
 tabButtons.forEach(button => {
     button.addEventListener('click', () => {
-        // Remove active class from all tabs
         tabButtons.forEach(btn => btn.classList.remove('active'));
-
-        // Add active class to clicked tab
         button.classList.add('active');
 
-        // Get filter value
         const filter = button.getAttribute('data-filter');
 
-        // Filter portfolio items with stagger animation
-        portfolioItems.forEach((item, index) => {
-            const category = item.getAttribute('data-category');
+        portfolioCards.forEach((card, index) => {
+            const category = card.getAttribute('data-category');
+            const matches = filter === 'all' || category === filter;
 
-            // First hide all items
-            item.classList.remove('active');
-
-            // Then show matching items with delay
-            setTimeout(() => {
-                if (filter === 'all') {
-                    item.classList.add('active');
-                } else if (category === filter) {
-                    item.classList.add('active');
-                }
-            }, index * 50); // Stagger effect
+            if (!matches) {
+                card.classList.add('hide-anim');
+                setTimeout(() => {
+                    card.classList.remove('active', 'hide-anim');
+                }, 280);
+            } else {
+                setTimeout(() => {
+                    card.classList.add('active', 'show-anim');
+                    setTimeout(() => card.classList.remove('show-anim'), 500);
+                }, index * 60);
+            }
         });
     });
 });
+
+// 3D Tilt effect on portfolio cards
+portfolioCards.forEach(card => {
+    card.addEventListener('mousemove', (e) => {
+        const rect   = card.getBoundingClientRect();
+        const x      = (e.clientX - rect.left) / rect.width  - 0.5;
+        const y      = (e.clientY - rect.top)  / rect.height - 0.5;
+        const tiltX  = y * -12;
+        const tiltY  = x *  12;
+        card.style.transform = `perspective(800px) rotateX(${tiltX}deg) rotateY(${tiltY}deg) scale(1.02)`;
+        // Move glow to cursor position
+        const glow = card.querySelector('.portfolio-card-glow');
+        if (glow) {
+            glow.style.background = `radial-gradient(circle at ${(x+0.5)*100}% ${(y+0.5)*100}%, rgba(14,165,233,0.3), transparent 60%)`;
+        }
+    });
+
+    card.addEventListener('mouseleave', () => {
+        card.style.transform = '';
+        card.style.transition = 'transform 0.6s cubic-bezier(0.34, 1.56, 0.64, 1)';
+        setTimeout(() => { card.style.transition = ''; }, 600);
+    });
+});
+
 
 // === SCROLL ANIMATIONS (INTERSECTION OBSERVER) ===
 const revealElements = document.querySelectorAll('.reveal');
